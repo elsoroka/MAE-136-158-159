@@ -17,7 +17,6 @@
 % % % % % IF YOU DO NOT KNOW WHAT TO DO WITH THIS SOURCE FILE % % % % %
 % You want to compile it to PDF
 % If you do not know LaTeX, pray to your lord and savior Google for assistance
-% Don't @ me
 % -emi
 
 \documentclass[draft=false, titlepage]{article}
@@ -39,17 +38,15 @@
 \newcommand{\gradient}{\vec{\nabla}}
 \newcommand{\deldelt}{\frac{\partial}{\partial t}}
 \newcommand{\partialfrac}[2]{\frac{\partial #1}{\partial #2}}
-% There is a real bad problem going on with closed triple integrals
-% emi is not smart enough to fix it :(
-% Zach the grad student cannot fix it either!
+% There is a package collision where I cannot import a closed triple integral symbol. It causes the \nabla used as a gradient operator to appear incorrectly as a big black blob.
 \newcommand{\volumeint}{\iiint_V}
 
 \title{Liebeck's 136 Notes, 21st Century Edition}
 \author{Transcribed from Professor Liebeck's notes PDF\\
 \small Emiko Soroka}
 \date{Last Compiled: \today\linebreak\linebreak
-\small Revision: 0.9\\
-Release Notes: Up to page 104 out of 124.\\Pages 97 - 104 have not been fully proofread.}
+\small Revision: 1.0\\
+Release Notes: All pages up!}
 
 \begin{document}
 
@@ -2400,7 +2397,258 @@ Note: $w$ and $\alpha_i \rightarrow 0$ as $b\rightarrow \infty$ (2D flow). For t
     \Gamma_0 = \frac{2 V_\infty S c_L}{b\pi}\\
     \text{and} \quad \alpha_i \quad \text{becomes} \quad \alpha_i = \frac{Sc_L}{\pi b^2}\\
     \text{Define aspect ratio as} \quad AR = \frac{b^2}{S} \quad \text{then} \quad \alpha_i = \frac{c_L}{\pi AR}\\
+    \text{Recall} \quad C_{Di} = \frac{2}{V_\infty S} \int_{-b/2}^{b/2}\Gamma(y) \alpha_i(y)dy\\
+    C_{Di} = \frac{2\alpha c\Gamma_o b}{2V_\infty S}\int_0^\pi \sin^2\theta\ d\theta = \frac{\pi \alpha_i \Gamma_o b}{2V_\infty S}\\
+    \text{or} \quad C_{D1} = \frac{\pi b}{2V_\infty S}\Big(\frac{C_L}{\pi R}\Big) \frac{2V_\infty SC_L}{b\pi}\\
+    \boxed{C_{Di} = \frac{C_L^2}{\pi AR}}
 \end{gather*}
 % end of page 110
+
+Consider a wing composed of the same airfoils with no geometric twist. It is desired to have an elliptic lift distribution.
+\begin{align*}
+    \text{No twist} & \rightarrow \alpha = const\\
+    \text{Elliptic} & \rightarrow \alpha_i = const\\
+    & \alpha_{EFF} = \alpha - \alpha_i = const\\
+    \text{Common Airfoil} & \rightarrow \alpha_o,\ \alpha_{0L} = const\\
+    & C_l = \alpha_o(\alpha_{EFF} - \alpha_{0L}) = const\\
+    & L(y) = q_\infty c \cdot C_l\\
+    & \rightarrow c(y) = \frac{L(y)}{q_\infty C_l} \quad \text{must vary elliptically}
+\end{align*}
+Few wings have elliptic planforms, however, the lift distribution on most wings is similar to elliptic.
+\begin{equation*}
+    C_{Di} = \frac{C_L^2}{\pi AR e},\quad 0.9 < e \le 1 \quad e=1 \ \text{Ellipse}
+\end{equation*}
+
+\subsection{Notes on Elliptic Lift Distribution}
+The fundamental equation applies for an arbitrary wing geometry where $\alpha,\ \alpha_{0L}$ and $c$ are specified functions of $y$. In this case, $\Gamma(y)$ is the solution that is sought. However if $\Gamma(y)$ is specified, then the fundamental equation is reduced to a simple algebraic equation where the solution is $c(y)$.
+\begin{align*}
+    \text{For} \quad \Gamma(y) &= \Gamma_o \sqrt{1-4(y/b)^2}\\
+    L(y) &= \rho_\infty V_\infty \Gamma_o \sqrt{1-4(y/b)^2} = C_l \frac{1}{2}\rho_\infty V_\infty^2 c\\
+    \text{Then} \quad C_l c &= \frac{2\Gamma_o}{V_\infty} \sqrt{1-4(y/b)^2}
+\end{align*}
+This the product $C_l c$ must vary elliptically. For common airfoils and zero twist, this yields an elliptic planform.
+\paragraph*{} However, $C_l$ intself could in principle provide the elliptic variation while $c=const$. Recall:
+\begin{align*}
+    C_l &= \alpha_0(\alpha - \alpha_{0L} - \alpha_i)\\
+    \alpha &\rightarrow \text{Twist}\\
+    \alpha_{0L} &\rightarrow \text{Camber}\\
+    \alpha_i &= \text{Const for elliptic } \Gamma(y)
+\end{align*}
+% End of page 113
+
+Thus $\alpha(y)$ and $\alpha_{0L}(y)$ could be set to provide (or at least contribute to) an elliptic $\Gamma(y)$ where $c(y)$ itself is not elliptic. In this case, if the angle of attack of the wing is changed, a constant $\Delta \alpha$ is added at \textbf{all} spanwise stations:
+\begin{equation*}
+    C_l = \alpha_0(\alpha + \Delta \alpha - \alpha_{0L} - \alpha_i)
+\end{equation*}
+and the product $C_l c$ will no longer vary elliptically.
+\paragraph*{} However, for the special case of common airfoils with zero twist, the resulting $C_lc$ will remain elliptic at all angles of attack since $C_l = const$ and $c(y)$ is elliptic.
+% End of page 114
+
+\subsection{Shrenk Approximation}
+Based on a comparison of experimental results, Shrenk showed the lift distribution on a non-elliptic planform with zero twist lies approximately halfway between that of an elliptic planform of the same area (Figure \ref{fig:shrenkApproximationPg115}).
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Figures/shrenkApproximationPg115.PNG}
+    \caption{Shrenk approximation for a non-elliptic planform}
+    \label{fig:shrenkApproximationPg115}
+\end{figure}
+
+\subsection{General Lift Distribution}
+Consider the spanwise transformation:
+\begin{equation*}
+y = -\frac{b}{2}\cos\theta,\quad \theta = 0,\ y = -\frac{b}{2},\quad \theta = \pi,\ y = +\frac{b}{2}
+\end{equation*}
+
+The elliptic circulation distribution becomes
+\begin{gather*}
+    \Gamma(y) = \Gamma_o \Big[ 1-4\big(\frac{y}{b}\big)^2 \Big] ^{1/2} = \Gamma_o \Big[ 1-4\frac{b^2}{4}\frac{\cos^2\theta}{b^2} \Big]^{1/2}\\
+    \text{or}\quad \Gamma(\theta) = \Gamma_o \sin\theta
+\end{gather*}
+For the general case, assume
+\begin{gather*}
+    \Gamma(\theta) = 2bV_\infty \sum_1^N A_n\sin n\theta\\
+    \frac{d\Gamma}{dy} = \frac{d\Gamma}{d\theta}\frac{d\theta}{dy} = 2bV_\infty \sum_1^N n A_n \cos n\theta \frac{d\theta}{dy}
+\end{gather*}
+Substitute in the fundamental equation:
+\begin{gather*}
+    \alpha(\theta_0) = \frac{2b}{\pi c(\theta_0} \sum_1^N A_n \sin n\theta + \alpha_{0L} (\theta_0) + \frac{1}{\pi} \int_0^\pi \frac{\sum_1^N n A_n \cos n\theta}{\cos\theta - \cos\theta_0} d\theta\\
+    \text{Recall}\quad \int_0^\pi \frac{\cos n\theta\ d\theta}{\cos\theta - \cos\theta_0} = \frac{\pi \sin n\theta}{\sin\theta_0}
+\end{gather*}
+The Fundamental Equation becomes Equation \ref{eq:fundamentalLiftDistribution}.
+\begin{equation}
+    \alpha(\theta_0) = \frac{2b}{\pi c(\theta_0)} \sum_1^N A_n \sin n\theta_0 + \alpha_{0L}(\theta_0) + \sum_1^N n A_n \frac{\sin n\theta_0}{\sin\theta_0}
+    \label{eq:fundamentalLiftDistribution}
+\end{equation}
+
+$b,\ c(\theta_0)$ and $\alpha_{0L}(\theta_0)$ and the airfoil section properties are given by the geometry of the wing. Next select N representative spanwise stations $\theta_0$'s and write the fundamental equation for each. This yields N linear algebraic equations that can be solved for the N unknowns $A_1,\ A_2...A_n$.\\
+This yields the circulation distribution $\Gamma(\theta_0)$.
+\paragraph*{} For the lift coefficient:
+\begin{gather*}
+    C_L = \frac{2}{V_\infty S} \int_{-b/2}^{b/2} \Gamma(y)dy = \frac{2b^2}{S} \sum_1^N A_n \int_0^\pi \sin n\theta\ sin\theta\ d\theta\\
+    \int_0^\pi \sin^2\theta\ d\theta = \frac{\pi}{2},\quad \int_0^\pi \sin n\theta\ \sin\theta\ d\theta = 0,\quad n>1\\
+    \rightarrow C_L = A_1 \pi \frac{b^2}{S} = A_1 \pi AR
+\end{gather*}
+
+(Although $C_L$ depends on $A_1$ alone, allthe $A_n$'s must be solved for to obtain $A_1$.)
+% End of page 117
+
+\paragraph*{} For the induced drag coefficient:
+\begin{align*}
+    C_{Di} &= \frac{2}{V_\infty S} \int_{-b/2}^{b/2} \Gamma(y) \alpha_i(y) dy\\
+    &= \frac{2b^2}{S} \int_0^\pi \big( \sum_1^N A_n \sin n\theta\big) \alpha_i (\theta) \sin n\theta\ d\theta\\
+    \alpha_i(y_0) &= \frac{1}{4\pi V_\infty} \int_{-b/2}^{b/2} \frac{(d\Gamma/dy)}{y-y_0} dy = \frac{1}{\pi}\sum_1^N nA_n \int_0^\pi \frac{\cos u\theta}{\cos\theta - \cos\theta_0}d\theta\\
+    \text{Then} \quad \alpha_i(\theta) &= \sum_1^N nA_n \frac{\sin n\theta}{\sin\theta}
+\end{align*}
+Substituting into the equation for $C_{DI}$:
+\begin{equation*}
+    C_{Di} = \frac{2b^2}{S} \int_0^\pi \big( \sum_1^N A_n \sin n\theta \big) \big( \sum_1^N n A_n \sin n\theta\big) d\theta
+\end{equation*}
+The integrand is a product of two summations whose terms have the form $\sin m\theta\ \sin k\theta$. However:
+\begin{equation*}
+    \int_0^\pi \sin m\theta\ \sin k\theta\ d\theta =
+    \Big\{\begin{matrix} 0, & m\neq k\\ \pi/2, & m=k\\\end{matrix}
+\end{equation*}
+Thus $C_{Di}$ becomes
+\begin{align*}
+    C_{Di} &= \frac{2b^2}{S} \Big( \sum_1^N n A_n^2\Big) \frac{\pi}{2}= \pi AR \sum_1^N n A_n^2\\
+    C_{Di} &= \pi AR \Big( A_1^2 + \sum_2^N nA_n^2\Big) - \pi AR A_1^2 \Big[ 1 + \sum_2^N \big(\frac{A_n}{A_1}\big)^2 \Big]
+\end{align*}
+% end of page 118
+
+Recalling that $C_l \ A_1 \pi AR$:
+\begin{equation*}
+    C_{Di}  \frac{C_L^2}{\pi AR}(1+S), \quad S = \sum_2^N n\big(\ A_n/A_1\big)^2
+\end{equation*}
+Note: $A_1 > A_2 > ... A_N \ \rightarrow \ S$ is small. Also, $S \ge 0$.
+\begin{equation*}
+    \boxed{C_{Di} \ge \frac{C_L^2}{\pi AR} \rightarrow \text{Elliptic Distance provides minimum } C_{Di}}
+\end{equation*}
+The expression for $C_{Di}$ is typically Equation \ref{eq:Cdi}
+\begin{equation}
+    \boxed{C_{Di} = \frac{C_L^2}{\pi AR e},\quad e\le 1 \text{ is the span efficiency factor}}
+    \label{eq:Cdi}
+\end{equation}
+% End of page 119
+
+\subsection{Lift Curve Slope for a Finite Wing}
+For a 2D Airfoil, $\alpha_0 = dC_l / d\alpha$. Define the lift curve slope for a finite wing as Equation \ref{eq:liftCurveSlopeFiniteWing}.
+\begin{equation}
+    \alpha = \frac{dC_L}{d\alpha}
+    \label{eq:liftCurveSlopeFiniteWing}
+\end{equation}
+When a finite wing is at the geometric angle $\alpha$, it experiences a reduced angle $\alpha_{EFF}$ given by Equation \ref{eq:alphaEffFiniteWing}.(Figure \ref{fig:ellipticWingClPg120}).
+\begin{equation}
+    \alpha_{EFF} = \alpha - \alpha_i,\quad \text{where } \alpha_i = \frac{C_L}{\pi AR} \text{ (Elliptic)}
+    \label{eq:alphaEffFiniteWing}
+\end{equation}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.3\linewidth]{Figures/ellipticWingClPg120.PNG}
+    \includegraphics[width=0.3\linewidth]{Figures/ellipticWingCl2Pg120.PNG}
+    \caption{$C_L$ slope for $\alpha$ and $\alpha_{EFF}$. The slope $\alpha$ is less than $\alpha_0$}
+    \label{fig:ellipticWingClPg120}
+\end{figure}
+Consider an elliptic wing with zero twist. Since $C_l = const$ across the span:
+\begin{equation*}
+    C_L = C_l
+\end{equation*}
+Since the wing experiences $\alpha_{EFF}$:
+\begin{equation*}
+    \frac{d C_L}{d\alpha_{EFF}} = \frac{d C_L}{d(\alpha - \alpha_i)} = \alpha_0
+\end{equation*}
+Integrating:
+\begin{align*}
+    C_L &= a_0(\alpha - \alpha_i) + const\\
+    C_L &= a_0(\alpha - \frac{C_L}{\pi AR}) + const\\
+    C_L \big(1+ \frac{a_o}{\pi AR}\big) = a_0 \alpha\\
+    \frac{d C_L}{d\alpha} = a = \frac{a_0}{1+a_0/(\pi AR) (1+\tau)}
+\end{align*}
+% End of page 120
+
+\subsection{Summary of Wing Drag}
+Wing drag originates from 3 sources:
+\begin{enumerate}
+    \item $D_f$ due to skin friction
+    \item $D_p$ due to separation (Pressure drag)
+    \item $D_i$ due to lift
+\end{enumerate}
+Define $C_{DP} = \frac{D_f + D_p}{q_\infty S}$ as the profile drag coefficient. $C_{DP}$ is regarded as a function of the airfoil geometry and Reynolds Number, and is a weak function of $C_l$.
+\begin{equation*}
+    C_{Di} = \frac{D_i}{q\infty S} = \frac{C_L^2}{\pi AR e}
+\end{equation*}
+\begin{align*}
+\text{Therefore total wing drag is} \quad&
+    C_D = C_{DP} + \frac{D_L^2}{\pi AR e}\\
+\text{For two of different aspect ratio:} \quad&
+    C_{D_1} = C_{DP_1} + \frac{C_L^2}{\pi AR_1 e},\quad C_{D_2} = C_{DP_2} + \frac{D_L^2}{\pi AR_2 e}\\
+\text{Assuming the same airfoil and twist:} \quad&
+    C_{DP_1} = C_{DP_2} \quad \text{and} \quad e_1 = e_2 = e\\
+\text{Taking the difference:} \quad&
+    C_{D_1} - C_{D_2} = \frac{C_L^2}{\pi e} \big(\frac{1}{AR_1} - \frac{1}{AR_2}\big)
+\end{align*}
+% end of page 121
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Figures/dragPolarPg122.PNG}
+    \caption{Drag polars for varying $AR$}
+    \label{fig:dragPolarPg122}
+\end{figure}
+Using the relation:
+\begin{equation*}
+    C_{D_1} = C_{D_2} + \frac{C_L^2}{\pi e} \big( \frac{1}{6} + \frac{1}{AR_2}\big)
+\end{equation*}
+The data for $AR=4,\ 3$, etc. collapses onto the polar for $AR=6$ (Figure \ref{fig:dragPolarPg122}). Similarly, using the 3D lift curve slope definition (Equation \ref{eq:3DLiftCurveSlope}), the lift curve slopes collapse to a common curve in Figure \ref{fig:liftCurveSlopeCollapse}.
+
+\begin{equation}
+    a = \frac{a_0}{1+a_0/\pi AR) (1+\tau)}
+    \label{eq:3DLiftCurveSlope}
+\end{equation}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.3\linewidth]{Figures/dragPolar_ClPg122.PNG}
+    \includegraphics[width=0.3\linewidth]{Figures/dragPolar_Cl2Pg122.PNG}
+    \caption{The lift curve slopes collapse to a common curve for varying $AR$}
+    \label{fig:liftCurveSlopeCollapse}
+\end{figure}
+
+$C_f = \tau /(\frac{1}{2}\rho V^2) = \tau/q$ and $D = \tau \times S_{wet}$ = drag force due to skin friction for a \textbf{flat plate} (Figure \ref{fig:dragFlatPlate}).
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.3\linewidth]{Figures/dragFlatPlatePg123.PNG}
+    \includegraphics[width=0.3\linewidth]{Figures/CfflatPlatePg123.PNG}
+    \caption{Drag and $C_f$ on a flate plate}
+    \label{fig:dragFlatPlate}
+\end{figure}
+% end of page 122
+
+\begin{gather*}
+    \text{Define } f = KC_f S_{wet} \ \text{as drag area}\\
+    f = D/q\\
+    C_D = \frac{D}{qS_{ref}} = \frac{f}{S_{ref}}\\
+    \text{Then } f_{total} = \sum f_i = \sum K_i C_{fi} S_{wet,\ i}\\
+    C_D = \frac{f_{total}}{S_{ref}}
+\end{gather*}
+% end of page 123
+
+\begin{gather*}
+\renewcommand{\arraystretch}{3.0}
+    C_D = C_{DP} + C_{Di} = C_{DP} + \frac{C_L^2}{\pi AR e}\\
+    D/L = C_D/C_L = \frac{C_{DP}}{C_L} + \frac{C_L}{\pi AR e}\\
+    \frac{d(C_d/C_L)}{dC_L} = -\frac{C_{DP}}{C_L} + \frac{1}{\pi AR e} = 0\\
+    C_{DP} = \frac{C_L^2}{\pi AR e} \text{ for } C_D/C_L\Big)_{min} \text{ or } C_L/C_D\Big)_{max}\\
+    C_L\Big)_{L/D\ max} = \big( \pi AR e C_{DP}\big)^{1/2}\\
+    \frac{C_L}{C_D}\big)_{max} = \frac{C_L}{C_{DP} + \frac{C_L^2}{\pi AR e}} =
+    \frac{\big( \pi AR e C_{DP}\big)^{1/2}}{2C_{DP}} = \Big(\frac{\pi AR e}{4 C_{DP}}\Big)^{1/2}\\
+    C_{DP} = \sum f_i/S_{ref} = \sum\frac{K_i C_{fi} S_{wet,\ i}}{S_{ref}} =
+    \bar{K} \bar{C_f} \frac{S_{wet}}{S_{ref}}\\
+    \frac{C_L}{C_D}\Big)_{max} = \Big(\frac{\pi b^2 e}{4 \bar{K} \bar{C_f} S_{wet}}\Big)^{1/2} =
+    Big( \frac{\pi}{4} e \frac{b^2}{\bar{K}\bar{C_f} S_{wet}}\Big)^{1/2}\\
+    \text{Optimum (max) lift:} \quad e=1,\ \bar{K}=1,\ C_f(RN)\\
+    \text{Then} \quad L/D\Big)_{max} = \text{const}(AR_{wet})^{1/2}
+\end{gather*}
+% End of page 124!
 
 \end{document}https://www.overleaf.com/project/5bc56340b43798777eed5b38

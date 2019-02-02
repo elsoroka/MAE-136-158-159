@@ -1,0 +1,39 @@
+\documentclass[draft=false, titlepage]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} % graphicx is for including images
+\usepackage{amsmath} % equation arrays, boxed equations, more symbols
+\usepackage{mathabx} % double/triple integrals
+% hyperref will turn the table of contents, etc. into hyperlinks. You can use them to jump to sections in the pdf
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    pdfborder={0 0 0},
+}
+% geometry is used to set the page margin, otherwise the margin is (in emi's opinion) too big
+\usepackage[margin=1in]{geometry}
+
+% let's define some custom commands
+\newcommand{\gradient}{\vec{\nabla}}
+\newcommand{\deldelt}{\frac{\partial}{\partial t}}
+\newcommand{\partialfrac}[2]{\frac{\partial #1}{\partial #2}}
+% There is a package collision where I cannot import a closed triple integral symbol. It causes the \nabla used as a gradient operator to appear incorrectly as a big black blob.
+\newcommand{\volumeint}{\iiint_V}
+
+\title{Liebeck's 158 Notes, 21st Century Edition}
+\author{Transcribed from Professor Liebeck's notes PDF\\
+	\small Emiko Soroka}
+\date{Last Compiled: \today\linebreak\linebreak
+	\small Revision: 0.1\\
+	Release Notes: Working on it...}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\listoffigures
+\listoftables
+\pagebreak
+
+% PRAGMA MARK NEW SECTION, page 1 % Page number corresponds to Liebeck's original
+	
+\end{document}
